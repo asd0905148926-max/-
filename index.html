@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
@@ -16,28 +17,20 @@
             box-sizing: border-box;
         }
 
-
         html,
         body {
-
             margin: 0;
-
             width: 100%;
             height: 100%;
-
             background: #fff;
-
             overflow: hidden;
         }
 
-
         body {
-
             min-height: 100vh;
             min-height: 100svh;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
@@ -50,11 +43,9 @@
         ===================================== */
 
         .main-image {
-
             display: block;
 
             max-width: 100vw;
-
             max-height: 100vh;
             max-height: 100svh;
 
@@ -64,10 +55,8 @@
             object-fit: contain;
 
             user-select: none;
-
             -webkit-user-drag: none;
         }
-
 
 
         /* =====================================
@@ -93,7 +82,7 @@
             overflow: hidden;
 
             box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.35);
+                0 5px 25px rgba(0, 0, 0, 0.4);
 
             cursor: grab;
 
@@ -102,19 +91,16 @@
             user-select: none;
 
             transition:
-                width 0.25s ease,
-                height 0.25s ease,
-                transform 0.25s ease,
-                border-radius 0.25s ease,
-                box-shadow 0.25s ease;
+                width 0.18s ease,
+                height 0.18s ease,
+                transform 0.18s ease,
+                border-radius 0.18s ease;
         }
 
 
         .video-container:active {
-
             cursor: grabbing;
         }
-
 
 
         /* =====================================
@@ -138,7 +124,6 @@
         }
 
 
-
         /* =====================================
            聲音提示
         ===================================== */
@@ -147,31 +132,29 @@
 
             position: absolute;
 
-            top: 8px;
-            right: 52px;
+            top: 10px;
+            right: 58px;
 
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
             border-radius: 50%;
 
             background:
-                rgba(0, 0, 0, 0.72);
+                rgba(0, 0, 0, 0.75);
 
             color: #fff;
 
-            font-size: 17px;
+            font-size: 18px;
 
             pointer-events: none;
 
             z-index: 20;
         }
-
 
 
         /* =====================================
@@ -182,37 +165,35 @@
 
             position: absolute;
 
-            top: 8px;
-            right: 8px;
+            top: 10px;
+            right: 10px;
 
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
 
             border: none;
 
             border-radius: 50%;
 
             background:
-                rgba(0, 0, 0, 0.72);
+                rgba(0, 0, 0, 0.75);
 
             color: #fff;
 
-            font-size: 21px;
+            font-size: 22px;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
             cursor: pointer;
 
-            z-index: 30;
-
             padding: 0;
+
+            z-index: 40;
 
             touch-action: manipulation;
         }
-
 
 
         /* =====================================
@@ -223,46 +204,44 @@
 
             position: absolute;
 
-            left: 8px;
-            bottom: 8px;
+            left: 10px;
+            bottom: 10px;
 
             display: flex;
 
-            gap: 6px;
+            gap: 7px;
 
             opacity: 0;
 
             transition:
                 opacity 0.2s ease;
 
-            z-index: 30;
+            z-index: 40;
         }
 
 
         .video-container:hover .controls {
-
             opacity: 1;
         }
 
 
         .control-button {
 
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
 
             border: none;
 
             border-radius: 50%;
 
             background:
-                rgba(0, 0, 0, 0.72);
+                rgba(0, 0, 0, 0.75);
 
             color: #fff;
 
             font-size: 16px;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
@@ -274,9 +253,53 @@
         }
 
 
+        /* =====================================
+           暴走模式
+        ===================================== */
+
+        .berserk {
+
+            animation:
+                shake 0.18s infinite;
+        }
+
+
+        @keyframes shake {
+
+            0% {
+                transform:
+                    translate(0, 0)
+                    rotate(0deg);
+            }
+
+            25% {
+                transform:
+                    translate(10px, -7px)
+                    rotate(1deg);
+            }
+
+            50% {
+                transform:
+                    translate(-9px, 9px)
+                    rotate(-1deg);
+            }
+
+            75% {
+                transform:
+                    translate(8px, 5px)
+                    rotate(1deg);
+            }
+
+            100% {
+                transform:
+                    translate(0, 0)
+                    rotate(0deg);
+            }
+        }
+
 
         /* =====================================
-           放大
+           全螢幕
         ===================================== */
 
         .fullscreen-funny {
@@ -291,7 +314,7 @@
                 translate(-50%, -50%) !important;
 
             width:
-                min(90vw, 900px) !important;
+                min(94vw, 1100px) !important;
 
             height: auto !important;
 
@@ -300,10 +323,9 @@
             border-radius: 16px;
 
             box-shadow:
-                0 10px 60px
-                rgba(0, 0, 0, 0.5);
+                0 20px 80px
+                rgba(0, 0, 0, 0.6);
         }
-
 
 
         /* =====================================
@@ -323,7 +345,7 @@
 
             border: none;
 
-            padding: 12px 16px;
+            padding: 14px 18px;
 
             border-radius: 999px;
 
@@ -335,7 +357,6 @@
 
             cursor: pointer;
         }
-
 
 
         /* =====================================
@@ -356,17 +377,17 @@
 
                 aspect-ratio: 16 / 9;
 
-                border-radius: 8px;
+                border-radius: 9px;
             }
 
 
             .sound-indicator {
 
-                top: 6px;
+                top: 7px;
                 right: 44px;
 
-                width: 30px;
-                height: 30px;
+                width: 31px;
+                height: 31px;
 
                 font-size: 14px;
             }
@@ -374,11 +395,11 @@
 
             .fake-close {
 
-                top: 6px;
-                right: 6px;
+                top: 7px;
+                right: 7px;
 
-                width: 30px;
-                height: 30px;
+                width: 31px;
+                height: 31px;
 
                 font-size: 17px;
             }
@@ -386,23 +407,17 @@
 
             .controls {
 
-                left: 6px;
-                bottom: 6px;
+                left: 7px;
+                bottom: 7px;
             }
 
 
             .control-button {
 
-                width: 30px;
-                height: 30px;
+                width: 31px;
+                height: 31px;
 
                 font-size: 13px;
-            }
-
-
-            .fullscreen-funny {
-
-                width: 94vw !important;
             }
 
 
@@ -427,11 +442,10 @@
 
     <img
         class="main-image"
+        id="mainImage"
         src="image.jpg"
         alt=""
-        id="mainImage"
     >
-
 
 
     <!-- =====================================
@@ -442,7 +456,6 @@
         class="video-container"
         id="videoContainer"
     >
-
 
         <video
             class="floating-video"
@@ -456,8 +469,6 @@
         ></video>
 
 
-        <!-- 聲音 -->
-
         <div
             class="sound-indicator"
             id="soundIndicator"
@@ -465,8 +476,6 @@
             🔇
         </div>
 
-
-        <!-- 假 × -->
 
         <button
             class="fake-close"
@@ -476,8 +485,6 @@
             ×
         </button>
 
-
-        <!-- 控制 -->
 
         <div class="controls">
 
@@ -503,9 +510,8 @@
     </div>
 
 
-
     <!-- =====================================
-         復活
+         復活按鈕
     ===================================== -->
 
     <button
@@ -566,7 +572,6 @@
             );
 
 
-
         /* =====================================
            自動播放
         ===================================== */
@@ -580,19 +585,11 @@
                 video.loop = true;
 
                 video.play().catch(
-                    function (error) {
-
-                        console.log(
-                            "Autoplay blocked:",
-                            error
-                        );
-
-                    }
+                    function () {}
                 );
 
             }
         );
-
 
 
         /* =====================================
@@ -601,12 +598,12 @@
 
         const savedLeft =
             localStorage.getItem(
-                "funnyVideoLeft"
+                "berserkVideoLeft"
             );
 
         const savedTop =
             localStorage.getItem(
-                "funnyVideoTop"
+                "berserkVideoTop"
             );
 
 
@@ -629,9 +626,13 @@
         }
 
 
-
         /* =====================================
            拖曳
+           
+           ★ 移動就算一次
+           ★ 不需要放開
+           ★ 每 3 次放大
+           ★ 無限放大
         ===================================== */
 
         let isDragging = false;
@@ -644,7 +645,10 @@
         let startLeft = 0;
         let startTop = 0;
 
-        let dragCount = 0;
+        let dragMoveCount = 0;
+
+        let lastCountX = 0;
+        let lastCountY = 0;
 
 
         container.addEventListener(
@@ -673,10 +677,18 @@
 
                 moved = false;
 
+
                 startX =
                     event.clientX;
 
                 startY =
+                    event.clientY;
+
+
+                lastCountX =
+                    event.clientX;
+
+                lastCountY =
                     event.clientY;
 
 
@@ -708,39 +720,49 @@
                 }
 
 
-                const deltaX =
+                const dx =
                     event.clientX -
                     startX;
 
-                const deltaY =
+                const dy =
                     event.clientY -
                     startY;
 
 
                 if (
-                    Math.abs(deltaX) > 5 ||
-                    Math.abs(deltaY) > 5
+                    Math.abs(dx) > 3 ||
+                    Math.abs(dy) > 3
                 ) {
 
                     moved = true;
                 }
 
 
+                /* =========================
+                   實際拖曳
+                ========================= */
+
                 let newLeft =
-                    startLeft + deltaX;
+                    startLeft + dx;
 
                 let newTop =
-                    startTop + deltaY;
+                    startTop + dy;
 
 
                 const maxLeft =
-                    window.innerWidth -
-                    container.offsetWidth;
+                    Math.max(
+                        0,
+                        window.innerWidth -
+                        container.offsetWidth
+                    );
 
 
                 const maxTop =
-                    window.innerHeight -
-                    container.offsetHeight;
+                    Math.max(
+                        0,
+                        window.innerHeight -
+                        container.offsetHeight
+                    );
 
 
                 newLeft =
@@ -776,13 +798,78 @@
                     "auto";
 
 
+                /* =========================
+                   移動距離計數
+                   
+                   每 15px 算一次
+                ========================= */
+
+                const moveX =
+                    event.clientX -
+                    lastCountX;
+
+                const moveY =
+                    event.clientY -
+                    lastCountY;
+
+
+                const moveDistance =
+                    Math.sqrt(
+                        moveX * moveX +
+                        moveY * moveY
+                    );
+
+
+                if (
+                    moveDistance >= 15
+                ) {
+
+                    const steps =
+                        Math.floor(
+                            moveDistance / 15
+                        );
+
+
+                    dragMoveCount +=
+                        steps;
+
+
+                    const ratio =
+                        (15 * steps) /
+                        moveDistance;
+
+
+                    lastCountX +=
+                        moveX * ratio;
+
+                    lastCountY +=
+                        moveY * ratio;
+
+
+                    /*
+                     每 3 次就放大
+                    */
+
+                    while (
+                        dragMoveCount >= 3
+                    ) {
+
+                        dragMoveCount -= 3;
+
+                        enlargeHuge();
+
+                    }
+
+                }
+
+
                 localStorage.setItem(
-                    "funnyVideoLeft",
+                    "berserkVideoLeft",
                     newLeft
                 );
 
                 localStorage.setItem(
-                    "funnyVideoTop",
+                    "berserkVideoTop",
                     newTop
                 );
 
@@ -793,23 +880,6 @@
         container.addEventListener(
             "pointerup",
             function (event) {
-
-                if (moved) {
-
-                    dragCount++;
-
-                    /*
-                     每拖五次變大
-                    */
-
-                    if (
-                        dragCount % 5 === 0
-                    ) {
-
-                        enlargeVideo();
-                    }
-                }
-
 
                 isDragging = false;
 
@@ -836,9 +906,372 @@
         );
 
 
+        /* =====================================
+           無限放大
+        ===================================== */
+
+        function enlargeHuge() {
+
+            if (
+                container.classList.contains(
+                    "fullscreen-funny"
+                )
+            ) {
+                return;
+            }
+
+
+            const currentWidth =
+                container.offsetWidth;
+
+
+            /*
+             ★ 每次 +150～250px
+             ★ 沒有最大值
+            */
+
+            const increase =
+                150 +
+                Math.random() * 100;
+
+
+            const newWidth =
+                currentWidth +
+                increase;
+
+
+            const newHeight =
+                Math.round(
+                    newWidth * 9 / 16
+                );
+
+
+            container.style.width =
+                newWidth + "px";
+
+            container.style.height =
+                newHeight + "px";
+
+
+            /*
+             如果變太大，
+             保持至少一部分在螢幕裡
+            */
+
+            const rect =
+                container.getBoundingClientRect();
+
+
+            let newLeft =
+                rect.left;
+
+            let newTop =
+                rect.top;
+
+
+            if (
+                newLeft >
+                window.innerWidth - 50
+            ) {
+
+                newLeft =
+                    window.innerWidth - 50;
+
+            }
+
+
+            if (
+                newTop >
+                window.innerHeight - 50
+            ) {
+
+                newTop =
+                    window.innerHeight - 50;
+
+            }
+
+
+            container.style.left =
+                newLeft + "px";
+
+            container.style.top =
+                newTop + "px";
+
+            container.style.right =
+                "auto";
+
+            container.style.bottom =
+                "auto";
+
+        }
+
 
         /* =====================================
-           點擊影片
+           隨機尺寸
+        ===================================== */
+
+        function randomSize() {
+
+            if (
+                container.classList.contains(
+                    "fullscreen-funny"
+                )
+            ) {
+                return;
+            }
+
+
+            const mobile =
+                window.innerWidth <= 600;
+
+
+            let min;
+            let max;
+
+
+            if (mobile) {
+
+                min = 130;
+
+                max =
+                    Math.max(
+                        140,
+                        window.innerWidth * 1.5
+                    );
+
+            } else {
+
+                min = 220;
+
+                max =
+                    Math.max(
+                        300,
+                        window.innerWidth * 1.5
+                    );
+
+            }
+
+
+            const width =
+                min +
+                Math.random() *
+                (max - min);
+
+
+            const height =
+                Math.round(
+                    width * 9 / 16
+                );
+
+
+            container.style.width =
+                width + "px";
+
+            container.style.height =
+                height + "px";
+
+        }
+
+
+        /* =====================================
+           瞬移
+        ===================================== */
+
+        function teleportVideo() {
+
+            if (
+                container.classList.contains(
+                    "fullscreen-funny"
+                )
+            ) {
+                return;
+            }
+
+
+            const margin = 5;
+
+
+            const maxLeft =
+                window.innerWidth -
+                container.offsetWidth -
+                margin;
+
+
+            const maxTop =
+                window.innerHeight -
+                container.offsetHeight -
+                margin;
+
+
+            /*
+             如果影片比螢幕還大，
+             允許它超出畫面
+            */
+
+            let left;
+            let top;
+
+
+            if (maxLeft <= margin) {
+
+                left =
+                    Math.random() *
+                    Math.max(
+                        50,
+                        window.innerWidth
+                    ) -
+                    container.offsetWidth *
+                    0.5;
+
+            } else {
+
+                left =
+                    margin +
+                    Math.random() *
+                    (maxLeft - margin);
+
+            }
+
+
+            if (maxTop <= margin) {
+
+                top =
+                    Math.random() *
+                    Math.max(
+                        50,
+                        window.innerHeight
+                    ) -
+                    container.offsetHeight *
+                    0.5;
+
+            } else {
+
+                top =
+                    margin +
+                    Math.random() *
+                    (maxTop - margin);
+
+            }
+
+
+            container.style.left =
+                left + "px";
+
+            container.style.top =
+                top + "px";
+
+            container.style.right =
+                "auto";
+
+            container.style.bottom =
+                "auto";
+
+
+            localStorage.setItem(
+                "berserkVideoLeft",
+                left
+            );
+
+            localStorage.setItem(
+                "berserkVideoTop",
+                top
+            );
+
+        }
+
+
+        /* =====================================
+           連續瞬移
+        ===================================== */
+
+        function crazyTeleport() {
+
+            let count = 0;
+
+
+            const timer =
+                setInterval(
+                    function () {
+
+                        teleportVideo();
+
+                        count++;
+
+
+                        if (
+                            count >= 4
+                        ) {
+
+                            clearInterval(
+                                timer
+                            );
+
+                        }
+
+                    },
+                    180
+                );
+
+        }
+
+
+        /* =====================================
+           暴走模式
+        ===================================== */
+
+        let berserk = false;
+
+
+        function startBerserkMode() {
+
+            if (berserk) {
+                return;
+            }
+
+
+            berserk = true;
+
+
+            container.classList.add(
+                "berserk"
+            );
+
+
+            crazyTeleport();
+
+            randomSize();
+
+
+            setTimeout(
+                function () {
+
+                    teleportVideo();
+
+                    randomSize();
+
+                },
+                1200
+            );
+
+
+            setTimeout(
+                function () {
+
+                    container.classList.remove(
+                        "berserk"
+                    );
+
+                    berserk = false;
+
+                },
+                2400
+            );
+
+        }
+
+
+        /* =====================================
+           點影片
         ===================================== */
 
         container.addEventListener(
@@ -866,7 +1299,6 @@
 
             }
         );
-
 
 
         /* =====================================
@@ -898,9 +1330,10 @@
 
                 muteButton.textContent =
                     "🔇";
-            }
-        }
 
+            }
+
+        }
 
 
         /* =====================================
@@ -927,15 +1360,15 @@
 
                     playButton.textContent =
                         "▶";
+
                 }
 
             }
         );
 
 
-
         /* =====================================
-           靜音
+           靜音按鈕
         ===================================== */
 
         muteButton.addEventListener(
@@ -948,7 +1381,6 @@
 
             }
         );
-
 
 
         /* =====================================
@@ -976,140 +1408,11 @@
         );
 
 
-
-        /* =====================================
-           影片變大
-        ===================================== */
-
-        function enlargeVideo() {
-
-            if (
-                container.classList.contains(
-                    "fullscreen-funny"
-                )
-            ) {
-                return;
-            }
-
-
-            const currentWidth =
-                container.offsetWidth;
-
-
-            const newWidth =
-                currentWidth + 50;
-
-
-            const maxWidth =
-                window.innerWidth - 20;
-
-
-            const finalWidth =
-                Math.min(
-                    newWidth,
-                    maxWidth
-                );
-
-
-            const finalHeight =
-                Math.round(
-                    finalWidth * 9 / 16
-                );
-
-
-            container.style.width =
-                finalWidth + "px";
-
-            container.style.height =
-                finalHeight + "px";
-
-        }
-
-
-
-        /* =====================================
-           瞬移
-        ===================================== */
-
-        function teleportVideo() {
-
-            if (
-                container.classList.contains(
-                    "fullscreen-funny"
-                )
-            ) {
-                return;
-            }
-
-
-            const margin = 10;
-
-
-            const maxLeft =
-                window.innerWidth -
-                container.offsetWidth -
-                margin;
-
-
-            const maxTop =
-                window.innerHeight -
-                container.offsetHeight -
-                margin;
-
-
-            if (
-                maxLeft <= margin ||
-                maxTop <= margin
-            ) {
-                return;
-            }
-
-
-            const randomLeft =
-                Math.floor(
-                    Math.random() *
-                    (maxLeft - margin)
-                ) + margin;
-
-
-            const randomTop =
-                Math.floor(
-                    Math.random() *
-                    (maxTop - margin)
-                ) + margin;
-
-
-            container.style.left =
-                randomLeft + "px";
-
-            container.style.top =
-                randomTop + "px";
-
-            container.style.right =
-                "auto";
-
-            container.style.bottom =
-                "auto";
-
-
-            localStorage.setItem(
-                "funnyVideoLeft",
-                randomLeft
-            );
-
-            localStorage.setItem(
-                "funnyVideoTop",
-                randomTop
-            );
-
-        }
-
-
-
         /* =====================================
            假 ×
-           第一次：瞬移
-           第二次：真的消失
+           
+           第一次：連續瞬移
+           第二次：消失
         ===================================== */
 
         let closeClicks = 0;
@@ -1127,9 +1430,11 @@
                 closeClicks++;
 
 
-                if (closeClicks === 1) {
+                if (
+                    closeClicks === 1
+                ) {
 
-                    teleportVideo();
+                    crazyTeleport();
 
 
                     closeTimer =
@@ -1139,7 +1444,7 @@
                                 closeClicks = 0;
 
                             },
-                            1200
+                            1000
                         );
 
                 } else {
@@ -1151,11 +1456,11 @@
                     closeClicks = 0;
 
                     hideVideo();
+
                 }
 
             }
         );
-
 
 
         /* =====================================
@@ -1191,7 +1496,10 @@
             reviveButton.style.display =
                 "none";
 
-            teleportVideo();
+
+            randomSize();
+
+            crazyTeleport();
 
         }
 
@@ -1206,28 +1514,27 @@
         );
 
 
-
         /* =====================================
            電腦：
            滑鼠靠近就逃跑
         ===================================== */
 
-        let lastEscape =
-            0;
+        let lastMouseEscape = 0;
 
 
         document.addEventListener(
             "pointermove",
             function (event) {
 
-                /*
-                 只有滑鼠使用
-                */
-
                 if (
                     event.pointerType !==
                     "mouse"
                 ) {
+                    return;
+                }
+
+
+                if (berserk) {
                     return;
                 }
 
@@ -1246,7 +1553,8 @@
 
 
                 if (
-                    now - lastEscape < 900
+                    now - lastMouseEscape <
+                    700
                 ) {
                     return;
                 }
@@ -1256,42 +1564,46 @@
                     container.getBoundingClientRect();
 
 
-                const centerX =
-                    rect.left +
-                    rect.width / 2;
+                /*
+                 影片周圍 180px
+                */
 
+                const expanded = {
 
-                const centerY =
-                    rect.top +
-                    rect.height / 2;
+                    left:
+                        rect.left - 180,
 
+                    right:
+                        rect.right + 180,
 
-                const distance =
-                    Math.sqrt(
+                    top:
+                        rect.top - 180,
 
-                        Math.pow(
-                            event.clientX -
-                            centerX,
-                            2
-                        )
+                    bottom:
+                        rect.bottom + 180
 
-                        +
-
-                        Math.pow(
-                            event.clientY -
-                            centerY,
-                            2
-                        )
-
-                    );
+                };
 
 
                 if (
-                    distance < 90
+
+                    event.clientX >
+                    expanded.left &&
+
+                    event.clientX <
+                    expanded.right &&
+
+                    event.clientY >
+                    expanded.top &&
+
+                    event.clientY <
+                    expanded.bottom
+
                 ) {
 
-                    lastEscape =
+                    lastMouseEscape =
                         now;
+
 
                     teleportVideo();
 
@@ -1301,14 +1613,12 @@
         );
 
 
-
         /* =====================================
            手機：
-           手指碰影片時有機率逃跑
+           碰影片有機率逃跑
         ===================================== */
 
-        let lastTouchEscape =
-            0;
+        let touchCount = 0;
 
 
         container.addEventListener(
@@ -1323,29 +1633,12 @@
                 }
 
 
-                const now =
-                    Date.now();
+                touchCount++;
 
-
-                if (
-                    now - lastTouchEscape <
-                    1200
-                ) {
-                    return;
-                }
-
-
-                /*
-                 45% 機率逃跑
-                */
 
                 if (
                     Math.random() < 0.45
                 ) {
-
-                    lastTouchEscape =
-                        now;
-
 
                     setTimeout(
                         function () {
@@ -1359,8 +1652,23 @@
                             }
 
                         },
-                        120
+                        100
                     );
+
+                }
+
+
+                /*
+                 摸三次直接暴走
+                */
+
+                if (
+                    touchCount >= 3
+                ) {
+
+                    touchCount = 0;
+
+                    startBerserkMode();
 
                 }
 
@@ -1368,11 +1676,9 @@
         );
 
 
-
         /* =====================================
            手機：
-           手指碰主圖片
-           也可能讓影片跑掉
+           碰主圖片
         ===================================== */
 
         mainImage.addEventListener(
@@ -1387,12 +1693,8 @@
                 }
 
 
-                /*
-                 25% 機率
-                */
-
                 if (
-                    Math.random() < 0.25
+                    Math.random() < 0.4
                 ) {
 
                     setTimeout(
@@ -1401,7 +1703,7 @@
                             teleportVideo();
 
                         },
-                        250
+                        150
                     );
 
                 }
@@ -1410,15 +1712,12 @@
         );
 
 
-
         /* =====================================
            手機：
-           長按影片
-           有機率逃跑
+           長按
         ===================================== */
 
-        let longPressTimer =
-            null;
+        let longPressTimer = null;
 
 
         container.addEventListener(
@@ -1441,19 +1740,12 @@
                                 !isDragging
                             ) {
 
-                                if (
-                                    Math.random() <
-                                    0.75
-                                ) {
-
-                                    teleportVideo();
-
-                                }
+                                startBerserkMode();
 
                             }
 
                         },
-                        700
+                        650
                     );
 
             }
@@ -1484,37 +1776,50 @@
         );
 
 
-
         /* =====================================
            自己亂跑
-           20～35 秒一次
+           
+           12～30 秒
         ===================================== */
 
-        function scheduleRandomMovement() {
+        function randomAutoChaos() {
 
             const delay =
-                20000 +
-                Math.random() * 15000;
+                12000 +
+                Math.random() * 18000;
 
 
             setTimeout(
                 function () {
 
-                    /*
-                     65% 機率真的跑
-                    */
-
                     if (
-                        Math.random() <
-                        0.65
+                        Math.random() < 0.75
                     ) {
 
-                        teleportVideo();
+                        if (
+                            Math.random() < 0.45
+                        ) {
+
+                            crazyTeleport();
+
+                        }
+
+
+                        randomSize();
+
+
+                        if (
+                            Math.random() < 0.3
+                        ) {
+
+                            startBerserkMode();
+
+                        }
 
                     }
 
 
-                    scheduleRandomMovement();
+                    randomAutoChaos();
 
                 },
                 delay
@@ -1523,8 +1828,7 @@
         }
 
 
-        scheduleRandomMovement();
-
+        randomAutoChaos();
 
 
         /* =====================================
@@ -1556,41 +1860,47 @@
                     container.getBoundingClientRect();
 
 
-                const maxLeft =
-                    window.innerWidth -
-                    container.offsetWidth;
+                /*
+                 影片如果太大，
+                 不強制縮小。
+                 
+                 只確保位置不要完全跑掉。
+                */
+
+                let left =
+                    rect.left;
+
+                let top =
+                    rect.top;
 
 
-                const maxTop =
-                    window.innerHeight -
-                    container.offsetHeight;
+                if (
+                    left >
+                    window.innerWidth - 30
+                ) {
+
+                    left =
+                        window.innerWidth - 30;
+
+                }
 
 
-                let newLeft =
-                    Math.max(
-                        0,
-                        Math.min(
-                            rect.left,
-                            maxLeft
-                        )
-                    );
+                if (
+                    top >
+                    window.innerHeight - 30
+                ) {
 
+                    top =
+                        window.innerHeight - 30;
 
-                let newTop =
-                    Math.max(
-                        0,
-                        Math.min(
-                            rect.top,
-                            maxTop
-                        )
-                    );
+                }
 
 
                 container.style.left =
-                    newLeft + "px";
+                    left + "px";
 
                 container.style.top =
-                    newTop + "px";
+                    top + "px";
 
                 container.style.right =
                     "auto";
