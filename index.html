@@ -3,43 +3,58 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
 
     <title></title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
 
+
         html,
         body {
+
             margin: 0;
+
             width: 100%;
             height: 100%;
+
             background: #fff;
+
+            overflow: hidden;
         }
 
+
         body {
+
             min-height: 100vh;
             min-height: 100svh;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
-            overflow: hidden;
             touch-action: none;
         }
 
-        /* =========================
+
+        /* =====================================
            主圖片
-        ========================= */
+        ===================================== */
 
         .main-image {
+
             display: block;
 
             max-width: 100vw;
+
             max-height: 100vh;
             max-height: 100svh;
 
@@ -47,20 +62,22 @@
             height: auto;
 
             object-fit: contain;
+
             user-select: none;
+
             -webkit-user-drag: none;
         }
 
 
-        /* =========================
+
+        /* =====================================
            浮動影片
-        ========================= */
+        ===================================== */
 
         .video-container {
+
             position: fixed;
 
-            left: auto;
-            top: auto;
             right: 20px;
             bottom: 20px;
 
@@ -76,30 +93,36 @@
             overflow: hidden;
 
             box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.3);
+                0 4px 20px rgba(0, 0, 0, 0.35);
 
             cursor: grab;
 
             touch-action: none;
+
             user-select: none;
 
             transition:
                 width 0.25s ease,
                 height 0.25s ease,
+                transform 0.25s ease,
                 border-radius 0.25s ease,
                 box-shadow 0.25s ease;
         }
 
+
         .video-container:active {
+
             cursor: grabbing;
         }
 
 
-        /* =========================
+
+        /* =====================================
            影片
-        ========================= */
+        ===================================== */
 
         .floating-video {
+
             width: 100%;
             height: 100%;
 
@@ -115,73 +138,48 @@
         }
 
 
-        /* =========================
-           控制列
-        ========================= */
 
-        .controls {
+        /* =====================================
+           聲音提示
+        ===================================== */
+
+        .sound-indicator {
+
             position: absolute;
 
-            left: 8px;
-            right: 8px;
-            bottom: 8px;
+            top: 8px;
+            right: 52px;
 
-            height: 40px;
-
-            display: flex;
-            align-items: center;
-            gap: 6px;
-
-            z-index: 20;
-
-            opacity: 0;
-
-            transition: opacity 0.2s ease;
-
-            pointer-events: none;
-        }
-
-        .video-container:hover .controls {
-            opacity: 1;
-        }
-
-
-        .control-button {
             width: 36px;
             height: 36px;
 
-            border: none;
-            border-radius: 50%;
-
-            background: rgba(0, 0, 0, 0.75);
-
-            color: white;
-
-            font-size: 16px;
-
             display: flex;
+
             align-items: center;
             justify-content: center;
 
-            cursor: pointer;
+            border-radius: 50%;
 
-            pointer-events: auto;
+            background:
+                rgba(0, 0, 0, 0.72);
 
-            padding: 0;
+            color: #fff;
 
-            touch-action: manipulation;
+            font-size: 17px;
+
+            pointer-events: none;
+
+            z-index: 20;
         }
 
-        .control-button:active {
-            transform: scale(0.9);
-        }
 
 
-        /* =========================
+        /* =====================================
            假 ×
-        ========================= */
+        ===================================== */
 
         .fake-close {
+
             position: absolute;
 
             top: 8px;
@@ -191,15 +189,18 @@
             height: 36px;
 
             border: none;
+
             border-radius: 50%;
 
-            background: rgba(0, 0, 0, 0.75);
+            background:
+                rgba(0, 0, 0, 0.72);
 
-            color: white;
+            color: #fff;
 
-            font-size: 20px;
+            font-size: 21px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -207,7 +208,65 @@
 
             z-index: 30;
 
-            pointer-events: auto;
+            padding: 0;
+
+            touch-action: manipulation;
+        }
+
+
+
+        /* =====================================
+           控制按鈕
+        ===================================== */
+
+        .controls {
+
+            position: absolute;
+
+            left: 8px;
+            bottom: 8px;
+
+            display: flex;
+
+            gap: 6px;
+
+            opacity: 0;
+
+            transition:
+                opacity 0.2s ease;
+
+            z-index: 30;
+        }
+
+
+        .video-container:hover .controls {
+
+            opacity: 1;
+        }
+
+
+        .control-button {
+
+            width: 36px;
+            height: 36px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background:
+                rgba(0, 0, 0, 0.72);
+
+            color: #fff;
+
+            font-size: 16px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
 
             padding: 0;
 
@@ -215,53 +274,25 @@
         }
 
 
-        /* =========================
-           聲音提示
-        ========================= */
 
-        .sound-indicator {
-            position: absolute;
+        /* =====================================
+           放大
+        ===================================== */
 
-            right: 52px;
-            top: 8px;
+        .fullscreen-funny {
 
-            width: 36px;
-            height: 36px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 50%;
-
-            background: rgba(0, 0, 0, 0.7);
-
-            color: white;
-
-            font-size: 17px;
-
-            pointer-events: none;
-
-            z-index: 15;
-
-            transition: opacity 0.3s ease;
-        }
-
-
-        /* =========================
-           放大模式
-        ========================= */
-
-        .video-container.fullscreen-funny {
             left: 50% !important;
             top: 50% !important;
 
             right: auto !important;
             bottom: auto !important;
 
-            transform: translate(-50%, -50%) !important;
+            transform:
+                translate(-50%, -50%) !important;
 
-            width: min(90vw, 900px) !important;
+            width:
+                min(90vw, 900px) !important;
+
             height: auto !important;
 
             aspect-ratio: 16 / 9;
@@ -269,88 +300,26 @@
             border-radius: 16px;
 
             box-shadow:
-                0 10px 60px rgba(0, 0, 0, 0.5);
+                0 10px 60px
+                rgba(0, 0, 0, 0.5);
         }
 
 
-        /* =========================
-           手機
-        ========================= */
 
-        @media (max-width: 600px) {
-
-            .video-container {
-
-                right: 12px;
-                bottom: 12px;
-
-                width: min(300px, calc(100vw - 24px));
-
-                height: auto;
-
-                aspect-ratio: 16 / 9;
-
-                border-radius: 8px;
-            }
-
-            .sound-indicator {
-
-                right: 50px;
-                top: 6px;
-
-                width: 30px;
-                height: 30px;
-
-                font-size: 14px;
-            }
-
-            .fake-close {
-
-                top: 6px;
-                right: 6px;
-
-                width: 30px;
-                height: 30px;
-
-                font-size: 17px;
-            }
-
-            .controls {
-
-                left: 6px;
-                right: 6px;
-                bottom: 6px;
-
-                height: 34px;
-            }
-
-            .control-button {
-
-                width: 30px;
-                height: 30px;
-
-                font-size: 13px;
-            }
-
-            .video-container.fullscreen-funny {
-
-                width: 94vw !important;
-
-            }
-        }
-
-
-        /* =========================
-           被關掉後的重新出現按鈕
-        ========================= */
+        /* =====================================
+           復活按鈕
+        ===================================== */
 
         .revive-button {
+
             position: fixed;
 
             right: 20px;
             bottom: 20px;
 
             z-index: 9998;
+
+            display: none;
 
             border: none;
 
@@ -365,20 +334,83 @@
             font-size: 14px;
 
             cursor: pointer;
-
-            display: none;
-
-            box-shadow:
-                0 4px 15px rgba(0, 0, 0, 0.25);
         }
+
+
+
+        /* =====================================
+           手機
+        ===================================== */
 
         @media (max-width: 600px) {
 
+            .video-container {
+
+                right: 12px;
+                bottom: 12px;
+
+                width:
+                    min(300px, calc(100vw - 24px));
+
+                height: auto;
+
+                aspect-ratio: 16 / 9;
+
+                border-radius: 8px;
+            }
+
+
+            .sound-indicator {
+
+                top: 6px;
+                right: 44px;
+
+                width: 30px;
+                height: 30px;
+
+                font-size: 14px;
+            }
+
+
+            .fake-close {
+
+                top: 6px;
+                right: 6px;
+
+                width: 30px;
+                height: 30px;
+
+                font-size: 17px;
+            }
+
+
+            .controls {
+
+                left: 6px;
+                bottom: 6px;
+            }
+
+
+            .control-button {
+
+                width: 30px;
+                height: 30px;
+
+                font-size: 13px;
+            }
+
+
+            .fullscreen-funny {
+
+                width: 94vw !important;
+            }
+
+
             .revive-button {
+
                 right: 12px;
                 bottom: 12px;
             }
-
         }
 
     </style>
@@ -389,25 +421,28 @@
 <body>
 
 
-    <!-- =========================
+    <!-- =====================================
          主圖片
-    ========================= -->
+    ===================================== -->
 
     <img
         class="main-image"
         src="image.jpg"
         alt=""
+        id="mainImage"
     >
 
 
-    <!-- =========================
+
+    <!-- =====================================
          浮動影片
-    ========================= -->
+    ===================================== -->
 
     <div
         class="video-container"
         id="videoContainer"
     >
+
 
         <video
             class="floating-video"
@@ -444,10 +479,7 @@
 
         <!-- 控制 -->
 
-        <div
-            class="controls"
-            id="controls"
-        >
+        <div class="controls">
 
             <button
                 class="control-button"
@@ -456,6 +488,7 @@
             >
                 ▶
             </button>
+
 
             <button
                 class="control-button"
@@ -470,9 +503,10 @@
     </div>
 
 
-    <!-- =========================
-         復活按鈕
-    ========================= -->
+
+    <!-- =====================================
+         復活
+    ===================================== -->
 
     <button
         class="revive-button"
@@ -486,35 +520,56 @@
 
     <script>
 
-        /* =========================
-           基本元素
-        ========================= */
+
+        /* =====================================
+           元素
+        ===================================== */
 
         const video =
-            document.getElementById("floatingVideo");
+            document.getElementById(
+                "floatingVideo"
+            );
 
         const container =
-            document.getElementById("videoContainer");
+            document.getElementById(
+                "videoContainer"
+            );
 
         const indicator =
-            document.getElementById("soundIndicator");
+            document.getElementById(
+                "soundIndicator"
+            );
 
         const fakeClose =
-            document.getElementById("fakeClose");
+            document.getElementById(
+                "fakeClose"
+            );
 
         const playButton =
-            document.getElementById("playButton");
+            document.getElementById(
+                "playButton"
+            );
 
         const muteButton =
-            document.getElementById("muteButton");
+            document.getElementById(
+                "muteButton"
+            );
 
         const reviveButton =
-            document.getElementById("reviveButton");
+            document.getElementById(
+                "reviveButton"
+            );
+
+        const mainImage =
+            document.getElementById(
+                "mainImage"
+            );
 
 
-        /* =========================
-           初始播放
-        ========================= */
+
+        /* =====================================
+           自動播放
+        ===================================== */
 
         window.addEventListener(
             "load",
@@ -528,7 +583,7 @@
                     function (error) {
 
                         console.log(
-                            "自動播放被瀏覽器阻止：",
+                            "Autoplay blocked:",
                             error
                         );
 
@@ -540,9 +595,9 @@
 
 
 
-        /* =========================
+        /* =====================================
            記住位置
-        ========================= */
+        ===================================== */
 
         const savedLeft =
             localStorage.getItem(
@@ -571,14 +626,13 @@
 
             container.style.bottom =
                 "auto";
-
         }
 
 
 
-        /* =========================
+        /* =====================================
            拖曳
-        ========================= */
+        ===================================== */
 
         let isDragging = false;
 
@@ -590,12 +644,12 @@
         let startLeft = 0;
         let startTop = 0;
 
+        let dragCount = 0;
+
 
         container.addEventListener(
             "pointerdown",
             function (event) {
-
-                /* 點到控制按鈕時不要拖 */
 
                 if (
                     event.target.closest(
@@ -655,10 +709,12 @@
 
 
                 const deltaX =
-                    event.clientX - startX;
+                    event.clientX -
+                    startX;
 
                 const deltaY =
-                    event.clientY - startY;
+                    event.clientY -
+                    startY;
 
 
                 if (
@@ -667,7 +723,6 @@
                 ) {
 
                     moved = true;
-
                 }
 
 
@@ -681,6 +736,7 @@
                 const maxLeft =
                     window.innerWidth -
                     container.offsetWidth;
+
 
                 const maxTop =
                     window.innerHeight -
@@ -720,8 +776,6 @@
                     "auto";
 
 
-                /* 記住位置 */
-
                 localStorage.setItem(
                     "funnyVideoLeft",
                     newLeft
@@ -740,7 +794,25 @@
             "pointerup",
             function (event) {
 
+                if (moved) {
+
+                    dragCount++;
+
+                    /*
+                     每拖五次變大
+                    */
+
+                    if (
+                        dragCount % 5 === 0
+                    ) {
+
+                        enlargeVideo();
+                    }
+                }
+
+
                 isDragging = false;
+
 
                 try {
 
@@ -765,9 +837,9 @@
 
 
 
-        /* =========================
-           點影片開關聲音
-        ========================= */
+        /* =====================================
+           點擊影片
+        ===================================== */
 
         container.addEventListener(
             "click",
@@ -787,7 +859,6 @@
                     moved = false;
 
                     return;
-
                 }
 
 
@@ -796,6 +867,11 @@
             }
         );
 
+
+
+        /* =====================================
+           聲音
+        ===================================== */
 
         function toggleMute() {
 
@@ -822,22 +898,21 @@
 
                 muteButton.textContent =
                     "🔇";
-
             }
-
         }
 
 
 
-        /* =========================
+        /* =====================================
            播放 / 暫停
-        ========================= */
+        ===================================== */
 
         playButton.addEventListener(
             "click",
             function (event) {
 
                 event.stopPropagation();
+
 
                 if (video.paused) {
 
@@ -852,16 +927,16 @@
 
                     playButton.textContent =
                         "▶";
-
                 }
 
             }
         );
 
 
-        /* =========================
-           靜音按鈕
-        ========================= */
+
+        /* =====================================
+           靜音
+        ===================================== */
 
         muteButton.addEventListener(
             "click",
@@ -876,9 +951,9 @@
 
 
 
-        /* =========================
+        /* =====================================
            雙擊放大
-        ========================= */
+        ===================================== */
 
         container.addEventListener(
             "dblclick",
@@ -902,28 +977,59 @@
 
 
 
-        /* =========================
-           假 ×
-           不是真的關掉
-           而是瞬移
-        ========================= */
+        /* =====================================
+           影片變大
+        ===================================== */
 
-        fakeClose.addEventListener(
-            "click",
-            function (event) {
+        function enlargeVideo() {
 
-                event.stopPropagation();
-
-                teleportVideo();
-
+            if (
+                container.classList.contains(
+                    "fullscreen-funny"
+                )
+            ) {
+                return;
             }
-        );
+
+
+            const currentWidth =
+                container.offsetWidth;
+
+
+            const newWidth =
+                currentWidth + 50;
+
+
+            const maxWidth =
+                window.innerWidth - 20;
+
+
+            const finalWidth =
+                Math.min(
+                    newWidth,
+                    maxWidth
+                );
+
+
+            const finalHeight =
+                Math.round(
+                    finalWidth * 9 / 16
+                );
+
+
+            container.style.width =
+                finalWidth + "px";
+
+            container.style.height =
+                finalHeight + "px";
+
+        }
 
 
 
-        /* =========================
-           隨機瞬移
-        ========================= */
+        /* =====================================
+           瞬移
+        ===================================== */
 
         function teleportVideo() {
 
@@ -938,10 +1044,12 @@
 
             const margin = 10;
 
+
             const maxLeft =
                 window.innerWidth -
                 container.offsetWidth -
                 margin;
+
 
             const maxTop =
                 window.innerHeight -
@@ -998,37 +1106,114 @@
 
 
 
-        /* =========================
-           每 30 秒自己跑一次
-        ========================= */
+        /* =====================================
+           假 ×
+           第一次：瞬移
+           第二次：真的消失
+        ===================================== */
 
-        setInterval(
-            function () {
+        let closeClicks = 0;
 
-                /*
-                 不是每次都跑，
-                 隨機決定要不要跑
-                */
+        let closeTimer = null;
 
-                if (
-                    Math.random() < 0.65
-                ) {
+
+        fakeClose.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+
+                closeClicks++;
+
+
+                if (closeClicks === 1) {
 
                     teleportVideo();
 
+
+                    closeTimer =
+                        setTimeout(
+                            function () {
+
+                                closeClicks = 0;
+
+                            },
+                            1200
+                        );
+
+                } else {
+
+                    clearTimeout(
+                        closeTimer
+                    );
+
+                    closeClicks = 0;
+
+                    hideVideo();
                 }
 
-            },
-            30000
+            }
         );
 
 
 
-        /* =========================
-           滑鼠靠近就逃跑
-        ========================= */
+        /* =====================================
+           消失
+        ===================================== */
 
-        let lastEscape = 0;
+        function hideVideo() {
+
+            container.style.display =
+                "none";
+
+            reviveButton.style.display =
+                "block";
+
+
+            setTimeout(
+                function () {
+
+                    reviveVideo();
+
+                },
+                5000
+            );
+
+        }
+
+
+        function reviveVideo() {
+
+            container.style.display =
+                "block";
+
+            reviveButton.style.display =
+                "none";
+
+            teleportVideo();
+
+        }
+
+
+        reviveButton.addEventListener(
+            "click",
+            function () {
+
+                reviveVideo();
+
+            }
+        );
+
+
+
+        /* =====================================
+           電腦：
+           滑鼠靠近就逃跑
+        ===================================== */
+
+        let lastEscape =
+            0;
 
 
         document.addEventListener(
@@ -1036,14 +1221,12 @@
             function (event) {
 
                 /*
-                 手機不要做這個，
-                 避免手指操作時太靠北
+                 只有滑鼠使用
                 */
 
                 if (
-                    window.matchMedia(
-                        "(hover: none)"
-                    ).matches
+                    event.pointerType !==
+                    "mouse"
                 ) {
                     return;
                 }
@@ -1063,7 +1246,7 @@
 
 
                 if (
-                    now - lastEscape < 800
+                    now - lastEscape < 900
                 ) {
                     return;
                 }
@@ -1077,6 +1260,7 @@
                     rect.left +
                     rect.width / 2;
 
+
                 const centerY =
                     rect.top +
                     rect.height / 2;
@@ -1084,26 +1268,30 @@
 
                 const distance =
                     Math.sqrt(
+
                         Math.pow(
                             event.clientX -
                             centerX,
                             2
-                        ) +
+                        )
+
+                        +
+
                         Math.pow(
                             event.clientY -
                             centerY,
                             2
                         )
+
                     );
 
 
-                /*
-                 距離 80px 內就跑
-                */
+                if (
+                    distance < 90
+                ) {
 
-                if (distance < 80) {
-
-                    lastEscape = now;
+                    lastEscape =
+                        now;
 
                     teleportVideo();
 
@@ -1114,175 +1302,234 @@
 
 
 
-        /* =========================
-           拖曳越多次越大
-        ========================= */
+        /* =====================================
+           手機：
+           手指碰影片時有機率逃跑
+        ===================================== */
 
-        let dragCount = 0;
+        let lastTouchEscape =
+            0;
+
+
+        container.addEventListener(
+            "pointerdown",
+            function (event) {
+
+                if (
+                    event.pointerType !==
+                    "touch"
+                ) {
+                    return;
+                }
+
+
+                const now =
+                    Date.now();
+
+
+                if (
+                    now - lastTouchEscape <
+                    1200
+                ) {
+                    return;
+                }
+
+
+                /*
+                 45% 機率逃跑
+                */
+
+                if (
+                    Math.random() < 0.45
+                ) {
+
+                    lastTouchEscape =
+                        now;
+
+
+                    setTimeout(
+                        function () {
+
+                            if (
+                                !isDragging
+                            ) {
+
+                                teleportVideo();
+
+                            }
+
+                        },
+                        120
+                    );
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================
+           手機：
+           手指碰主圖片
+           也可能讓影片跑掉
+        ===================================== */
+
+        mainImage.addEventListener(
+            "pointerdown",
+            function (event) {
+
+                if (
+                    event.pointerType !==
+                    "touch"
+                ) {
+                    return;
+                }
+
+
+                /*
+                 25% 機率
+                */
+
+                if (
+                    Math.random() < 0.25
+                ) {
+
+                    setTimeout(
+                        function () {
+
+                            teleportVideo();
+
+                        },
+                        250
+                    );
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================
+           手機：
+           長按影片
+           有機率逃跑
+        ===================================== */
+
+        let longPressTimer =
+            null;
+
+
+        container.addEventListener(
+            "pointerdown",
+            function (event) {
+
+                if (
+                    event.pointerType !==
+                    "touch"
+                ) {
+                    return;
+                }
+
+
+                longPressTimer =
+                    setTimeout(
+                        function () {
+
+                            if (
+                                !isDragging
+                            ) {
+
+                                if (
+                                    Math.random() <
+                                    0.75
+                                ) {
+
+                                    teleportVideo();
+
+                                }
+
+                            }
+
+                        },
+                        700
+                    );
+
+            }
+        );
 
 
         container.addEventListener(
             "pointerup",
             function () {
 
-                if (!moved) {
-                    return;
-                }
-
-
-                dragCount++;
-
-
-                /*
-                 每拖 5 次放大一次
-                */
-
-                if (
-                    dragCount % 5 === 0
-                ) {
-
-                    enlargeVideo();
-
-                }
+                clearTimeout(
+                    longPressTimer
+                );
 
             }
         );
 
 
-        function enlargeVideo() {
+        container.addEventListener(
+            "pointercancel",
+            function () {
 
-            if (
-                container.classList.contains(
-                    "fullscreen-funny"
-                )
-            ) {
-                return;
-            }
-
-
-            const currentWidth =
-                container.offsetWidth;
-
-
-            const currentHeight =
-                container.offsetHeight;
-
-
-            const newWidth =
-                currentWidth + 50;
-
-
-            const newHeight =
-                Math.round(
-                    newWidth * 9 / 16
+                clearTimeout(
+                    longPressTimer
                 );
-
-
-            /*
-             最大不要超過螢幕
-            */
-
-            const maxWidth =
-                window.innerWidth - 20;
-
-
-            const finalWidth =
-                Math.min(
-                    newWidth,
-                    maxWidth
-                );
-
-
-            const finalHeight =
-                Math.round(
-                    finalWidth * 9 / 16
-                );
-
-
-            container.style.width =
-                finalWidth + "px";
-
-            container.style.height =
-                finalHeight + "px";
-
-        }
-
-
-
-        /* =========================
-           「關閉」後其實只是消失
-        ========================= */
-
-        let hidden = false;
-
-
-        fakeClose.addEventListener(
-            "dblclick",
-            function (event) {
-
-                event.stopPropagation();
-
-                hideVideo();
 
             }
         );
 
 
-        function hideVideo() {
 
-            hidden = true;
+        /* =====================================
+           自己亂跑
+           20～35 秒一次
+        ===================================== */
 
-            container.style.display =
-                "none";
+        function scheduleRandomMovement() {
 
-            reviveButton.style.display =
-                "block";
+            const delay =
+                20000 +
+                Math.random() * 15000;
 
-
-            /*
-             5 秒後自己復活
-            */
 
             setTimeout(
                 function () {
 
-                    reviveVideo();
+                    /*
+                     65% 機率真的跑
+                    */
+
+                    if (
+                        Math.random() <
+                        0.65
+                    ) {
+
+                        teleportVideo();
+
+                    }
+
+
+                    scheduleRandomMovement();
 
                 },
-                5000
+                delay
             );
 
         }
 
 
-        function reviveVideo() {
-
-            hidden = false;
-
-            container.style.display =
-                "block";
-
-            reviveButton.style.display =
-                "none";
-
-        }
-
-
-        reviveButton.addEventListener(
-            "click",
-            function () {
-
-                reviveVideo();
-
-            }
-        );
+        scheduleRandomMovement();
 
 
 
-        /* =========================
-           視窗尺寸改變時
-           確保影片還在畫面內
-        ========================= */
+        /* =====================================
+           螢幕尺寸改變
+        ===================================== */
 
         window.addEventListener(
             "resize",
@@ -1309,37 +1556,31 @@
                     container.getBoundingClientRect();
 
 
-                let newLeft =
-                    rect.left;
-
-                let newTop =
-                    rect.top;
-
-
                 const maxLeft =
                     window.innerWidth -
                     container.offsetWidth;
+
 
                 const maxTop =
                     window.innerHeight -
                     container.offsetHeight;
 
 
-                newLeft =
+                let newLeft =
                     Math.max(
                         0,
                         Math.min(
-                            newLeft,
+                            rect.left,
                             maxLeft
                         )
                     );
 
 
-                newTop =
+                let newTop =
                     Math.max(
                         0,
                         Math.min(
-                            newTop,
+                            rect.top,
                             maxTop
                         )
                     );
@@ -1360,8 +1601,8 @@
             }
         );
 
-    </script>
 
+    </script>
 
 </body>
 
