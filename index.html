@@ -31,7 +31,11 @@
             overflow: hidden;
         }
 
-        img {
+        /* =========================
+           中間的圖片
+           ========================= */
+
+        .main-image {
             display: block;
 
             max-width: 100vw;
@@ -43,12 +47,231 @@
 
             object-fit: contain;
         }
+
+
+        /* =========================
+           右下角浮動影片
+           ========================= */
+
+        .video-container {
+            position: fixed;
+
+            right: 20px;
+            bottom: 20px;
+
+            width: 220px;
+            height: 125px;
+
+            z-index: 1000;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            background: #000;
+
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.25);
+
+            cursor: pointer;
+        }
+
+
+        /* 影片本體 */
+
+        .floating-video {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+        }
+
+
+        /* =========================
+           音量提示
+           ========================= */
+
+        .sound-indicator {
+            position: absolute;
+
+            right: 8px;
+            bottom: 8px;
+
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: rgba(0, 0, 0, 0.65);
+
+            color: white;
+
+            font-size: 16px;
+
+            pointer-events: none;
+
+            transition: opacity 0.2s;
+        }
+
+
+        /* =========================
+           手機版
+           ========================= */
+
+        @media (max-width: 600px) {
+
+            .video-container {
+                right: 12px;
+                bottom: 12px;
+
+                width: 140px;
+                height: 79px;
+
+                border-radius: 8px;
+            }
+
+            .sound-indicator {
+                right: 5px;
+                bottom: 5px;
+
+                width: 26px;
+                height: 26px;
+
+                font-size: 13px;
+            }
+        }
+
     </style>
 </head>
 
+
 <body>
 
-    <img src="image.jpg" alt="">
+
+    <!-- =========================
+         中間的圖片
+         ========================= -->
+
+    <img
+        class="main-image"
+        src="image.jpg"
+        alt=""
+    >
+
+
+    <!-- =========================
+         右下角浮動影片
+         ========================= -->
+
+    <div
+        class="video-container"
+        id="videoContainer"
+    >
+
+        <video
+            class="floating-video"
+            id="floatingVideo"
+            autoplay
+            muted
+            loop
+            playsinline
+        >
+
+            <source
+                src="music.mp4"
+                type="video/mp4"
+            >
+
+        </video>
+
+
+        <!-- 音量圖示 -->
+
+        <div
+            class="sound-indicator"
+            id="soundIndicator"
+        >
+            🔇
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        /* =========================
+           取得元素
+           ========================= */
+
+        const video =
+            document.getElementById("floatingVideo");
+
+        const container =
+            document.getElementById("videoContainer");
+
+        const soundIndicator =
+            document.getElementById("soundIndicator");
+
+
+        /* =========================
+           點擊影片
+           ========================= */
+
+        container.addEventListener("click", function () {
+
+            /*
+             * 如果目前是靜音
+             * → 開啟聲音
+             */
+
+            if (video.muted) {
+
+                video.muted = false;
+
+                video.volume = 1;
+
+                soundIndicator.textContent = "🔊";
+
+            }
+
+            /*
+             * 如果目前有聲音
+             * → 靜音
+             */
+
+            else {
+
+                video.muted = true;
+
+                soundIndicator.textContent = "🔇";
+
+            }
+
+        });
+
+
+        /* =========================
+           確保影片自動播放
+           ========================= */
+
+        video.play().catch(function () {
+
+            /*
+             * 瀏覽器如果阻止自動播放，
+             * 使用者點擊浮動影片後仍然可以播放。
+             */
+
+        });
+
+    </script>
+
 
 </body>
 
