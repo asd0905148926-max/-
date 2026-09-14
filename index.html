@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title></title>
 
     <style>
-        html, body {
+        html,
+        body {
             margin: 0;
             padding: 0;
             width: 100%;
@@ -32,26 +34,35 @@
 
 <body>
 
+    <!-- 主圖片 -->
     <img src="image.jpg" alt="">
 
-    <audio id="bgMusic" autoplay loop>
+    <!-- 背景音樂 -->
+    <audio
+        id="bgMusic"
+        autoplay
+        loop
+        preload="auto"
+    >
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
     <script>
         const bgMusic = document.getElementById("bgMusic");
 
+        // 音量
         bgMusic.volume = 1;
 
-        // 嘗試自動播放
+        // 嘗試網頁載入後立即播放
         bgMusic.play().catch(() => {});
 
         // 如果瀏覽器阻擋自動播放，
-        // 使用者第一次點擊或觸碰網頁時開始播放
+        // 第一次點擊時開始播放
         document.addEventListener("click", () => {
             bgMusic.play().catch(() => {});
         }, { once: true });
 
+        // 手機第一次觸碰時開始播放
         document.addEventListener("touchstart", () => {
             bgMusic.play().catch(() => {});
         }, { once: true });
