@@ -31,6 +31,7 @@
             overflow: hidden;
         }
 
+        /* 主圖片 */
         .main-image {
             display: block;
 
@@ -44,13 +45,19 @@
             object-fit: contain;
         }
 
-        /* 右下角影片 */
+
+        /* =========================
+           浮動影片視窗
+        ========================= */
+
         .video-container {
             position: fixed;
 
+            /* 初始位置 */
             right: 20px;
             bottom: 20px;
 
+            /* 電腦尺寸 */
             width: 500px;
             height: 281px;
 
@@ -64,8 +71,21 @@
 
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 
-            cursor: pointer;
+            /* 電腦可以拖 */
+            cursor: grab;
+
+            /* 防止手機拖曳時整個網頁跟著滑 */
+            touch-action: none;
+
+            user-select: none;
         }
+
+        .video-container:active {
+            cursor: grabbing;
+        }
+
+
+        /* 影片 */
 
         .floating-video {
             width: 100%;
@@ -74,9 +94,15 @@
             display: block;
 
             object-fit: cover;
+
+            pointer-events: none;
+
+            user-select: none;
         }
 
-        /* 聲音提示 */
+
+        /* 聲音圖示 */
+
         .sound-indicator {
             position: absolute;
 
@@ -99,16 +125,24 @@
             font-size: 18px;
 
             pointer-events: none;
+
+            user-select: none;
         }
 
-        /* 手機 */
+
+        /* =========================
+           手機
+        ========================= */
+
         @media (max-width: 600px) {
 
             .video-container {
+
                 right: 12px;
                 bottom: 12px;
 
                 width: min(300px, calc(100vw - 24px));
+
                 height: auto;
 
                 aspect-ratio: 16 / 9;
@@ -117,6 +151,7 @@
             }
 
             .sound-indicator {
+
                 right: 6px;
                 bottom: 6px;
 
@@ -126,19 +161,29 @@
                 font-size: 14px;
             }
         }
+
     </style>
 </head>
 
+
 <body>
 
-    <!-- 中間主圖片 -->
+
+    <!-- =========================
+         主圖片
+    ========================= -->
+
     <img
         class="main-image"
         src="image.jpg"
         alt=""
     >
 
-    <!-- 右下角影片 -->
+
+    <!-- =========================
+         浮動影片
+    ========================= -->
+
     <div
         class="video-container"
         id="videoContainer"
@@ -155,7 +200,7 @@
             preload="auto"
         ></video>
 
-        <!-- 聲音狀態 -->
+
         <div
             class="sound-indicator"
             id="soundIndicator"
@@ -164,6 +209,8 @@
         </div>
 
     </div>
+
+
 
     <script>
 
@@ -177,7 +224,10 @@
             document.getElementById("soundIndicator");
 
 
-        /* 網頁載入後自動播放 */
+        /* =========================
+           自動播放
+        ========================= */
+
         window.addEventListener("load", function () {
 
             video.muted = true;
@@ -196,30 +246,214 @@
         });
 
 
-        /* 點擊影片切換聲音 */
-        container.addEventListener("click", function () {
 
-            if (video.muted) {
+        /* =========================
+           拖曳功能
+        ========================= */
 
-                video.muted = false;
+        let isDragging = false;
 
-                video.volume = 1;
+        let startX = 0;
+        let startY = 0;
 
-                indicator.textContent = "🔊";
+        let startLeft = 0;
+        let startTop = 0;
 
-                video.play();
+        let moved = false;
 
-            } else {
 
-                video.muted = true;
+        /* 按下 */
 
-                indicator.textContent = "🔇";
+        container.addEventListener(
+            "pointerdown",
+            function (event) {
+
+                isDragging = true;
+
+                moved = false;
+
+                startX = event.clientX;
+                startY = event.clientY;
+
+                const rect =
+                    container.getBoundingClientRect();
+
+                startLeft = rect.left;
+                startTop = rect.top;
+
+
+                /* 抓住這個指標 */
+
+                container.setPointerCapture(
+                    event.pointerId
+                );
 
             }
+        );
 
-        });
+
+        /* 移動 */
+
+        container.addEventListener(
+            "pointermove",
+            function (event) {
+
+                if (!isDragging) {
+                    return;
+                }
+
+
+                const deltaX =
+                    event.clientX - startX;
+
+                const deltaY =
+                    event.clientY - startY;
+
+
+                /* 移動超過幾 px 就視為拖曳 */
+
+                if (
+                    Math.abs(deltaX) > 5 ||
+                    Math.abs(deltaY) > 5
+                ) {
+
+                    moved = true;
+
+                }
+
+
+                let newLeft =
+                    startLeft + deltaX;
+
+                let newTop =
+                    startTop + deltaY;
+
+
+                /* 不允許拖出螢幕 */
+
+                const maxLeft =
+                    window.innerWidth -
+                    container.offsetWidth;
+
+                const maxTop =
+                    window.innerHeight -
+                    container.offsetHeight;
+
+
+                newLeft =
+                    Math.max(
+                        0,
+                        Math.min(
+                            newLeft,
+                            maxLeft
+                        )
+                    );
+
+
+                newTop =
+                    Math.max(
+                        0,
+                        Math.min(
+                            newTop,
+                            maxTop
+                        )
+                    );
+
+
+                /* 改成 left / top */
+
+                container.style.left =
+                    newLeft + "px";
+
+                container.style.top =
+                    newTop + "px";
+
+                container.style.right =
+                    "auto";
+
+                container.style.bottom =
+                    "auto";
+
+            }
+        );
+
+
+        /* 放開 */
+
+        container.addEventListener(
+            "pointerup",
+            function (event) {
+
+                isDragging = false;
+
+                try {
+
+                    container.releasePointerCapture(
+                        event.pointerId
+                    );
+
+                } catch (error) {}
+
+            }
+        );
+
+
+        container.addEventListener(
+            "pointercancel",
+            function () {
+
+                isDragging = false;
+
+            }
+        );
+
+
+
+        /* =========================
+           點擊切換聲音
+        ========================= */
+
+        container.addEventListener(
+            "click",
+            function () {
+
+                /*
+                 如果剛剛有拖曳，
+                 就不要把拖曳當成點擊
+                */
+
+                if (moved) {
+
+                    moved = false;
+
+                    return;
+
+                }
+
+
+                if (video.muted) {
+
+                    video.muted = false;
+
+                    video.volume = 1;
+
+                    indicator.textContent = "🔊";
+
+                    video.play();
+
+                } else {
+
+                    video.muted = true;
+
+                    indicator.textContent = "🔇";
+
+                }
+
+            }
+        );
 
     </script>
+
 
 </body>
 
