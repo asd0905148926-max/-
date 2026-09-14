@@ -82,7 +82,8 @@
             overflow: hidden;
 
             box-shadow:
-                0 5px 25px rgba(0, 0, 0, 0.4);
+                0 5px 25px
+                rgba(0, 0, 0, 0.4);
 
             cursor: grab;
 
@@ -91,10 +92,9 @@
             user-select: none;
 
             transition:
-                width 0.18s ease,
-                height 0.18s ease,
-                transform 0.18s ease,
-                border-radius 0.18s ease;
+                width 0.12s ease,
+                height 0.12s ease,
+                transform 0.12s ease;
         }
 
 
@@ -139,6 +139,7 @@
             height: 38px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -183,6 +184,7 @@
             font-size: 22px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -242,6 +244,7 @@
             font-size: 16px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -254,13 +257,13 @@
 
 
         /* =====================================
-           暴走模式
+           暴走震動
         ===================================== */
 
         .berserk {
 
             animation:
-                shake 0.18s infinite;
+                shake 0.08s infinite;
         }
 
 
@@ -274,19 +277,19 @@
 
             25% {
                 transform:
-                    translate(10px, -7px)
+                    translate(8px, -6px)
                     rotate(1deg);
             }
 
             50% {
                 transform:
-                    translate(-9px, 9px)
+                    translate(-7px, 7px)
                     rotate(-1deg);
             }
 
             75% {
                 transform:
-                    translate(8px, 5px)
+                    translate(6px, 4px)
                     rotate(1deg);
             }
 
@@ -426,6 +429,7 @@
                 right: 12px;
                 bottom: 12px;
             }
+
         }
 
     </style>
@@ -629,10 +633,9 @@
         /* =====================================
            拖曳
            
-           ★ 移動就算一次
-           ★ 不需要放開
-           ★ 每 3 次放大
-           ★ 無限放大
+           每移動 15px 算一次
+           每 3 次放大
+           無限放大
         ===================================== */
 
         let isDragging = false;
@@ -800,8 +803,6 @@
 
                 /* =========================
                    移動距離計數
-                   
-                   每 15px 算一次
                 ========================= */
 
                 const moveX =
@@ -845,10 +846,6 @@
                     lastCountY +=
                         moveY * ratio;
 
-
-                    /*
-                     每 3 次就放大
-                    */
 
                     while (
                         dragMoveCount >= 3
@@ -926,8 +923,7 @@
 
 
             /*
-             ★ 每次 +150～250px
-             ★ 沒有最大值
+             每次 +150～250px
             */
 
             const increase =
@@ -954,48 +950,47 @@
 
 
             /*
-             如果變太大，
-             保持至少一部分在螢幕裡
+             保持至少一部分還在畫面內
             */
 
             const rect =
                 container.getBoundingClientRect();
 
 
-            let newLeft =
+            let left =
                 rect.left;
 
-            let newTop =
+            let top =
                 rect.top;
 
 
             if (
-                newLeft >
+                left >
                 window.innerWidth - 50
             ) {
 
-                newLeft =
+                left =
                     window.innerWidth - 50;
 
             }
 
 
             if (
-                newTop >
+                top >
                 window.innerHeight - 50
             ) {
 
-                newTop =
+                top =
                     window.innerHeight - 50;
 
             }
 
 
             container.style.left =
-                newLeft + "px";
+                left + "px";
 
             container.style.top =
-                newTop + "px";
+                top + "px";
 
             container.style.right =
                 "auto";
@@ -1103,21 +1098,23 @@
                 margin;
 
 
-            /*
-             如果影片比螢幕還大，
-             允許它超出畫面
-            */
-
             let left;
             let top;
 
 
-            if (maxLeft <= margin) {
+            /*
+             影片比螢幕大時
+             仍然允許亂跑
+            */
+
+            if (
+                maxLeft <= margin
+            ) {
 
                 left =
                     Math.random() *
                     Math.max(
-                        50,
+                        100,
                         window.innerWidth
                     ) -
                     container.offsetWidth *
@@ -1133,12 +1130,14 @@
             }
 
 
-            if (maxTop <= margin) {
+            if (
+                maxTop <= margin
+            ) {
 
                 top =
                     Math.random() *
                     Math.max(
-                        50,
+                        100,
                         window.innerHeight
                     ) -
                     container.offsetHeight *
@@ -1181,55 +1180,24 @@
 
 
         /* =====================================
-           連續瞬移
+           高速連續瞬移
+           
+           0.06～0.20 秒一次
         ===================================== */
 
-        function crazyTeleport() {
+        let chaosRunning = false;
 
-            let count = 0;
-
-
-            const timer =
-                setInterval(
-                    function () {
-
-                        teleportVideo();
-
-                        count++;
+        let chaosTimer = null;
 
 
-                        if (
-                            count >= 4
-                        ) {
+        function startFastChaos() {
 
-                            clearInterval(
-                                timer
-                            );
-
-                        }
-
-                    },
-                    180
-                );
-
-        }
-
-
-        /* =====================================
-           暴走模式
-        ===================================== */
-
-        let berserk = false;
-
-
-        function startBerserkMode() {
-
-            if (berserk) {
+            if (chaosRunning) {
                 return;
             }
 
 
-            berserk = true;
+            chaosRunning = true;
 
 
             container.classList.add(
@@ -1237,34 +1205,94 @@
             );
 
 
-            crazyTeleport();
+            /*
+             持續 2～5 秒
+            */
 
-            randomSize();
+            const chaosDuration =
+                2000 +
+                Math.random() * 3000;
 
 
-            setTimeout(
-                function () {
+            const endTime =
+                Date.now() +
+                chaosDuration;
 
-                    teleportVideo();
+
+            function chaosStep() {
+
+                if (
+                    Date.now() >= endTime ||
+                    container.style.display ===
+                    "none"
+                ) {
+
+                    stopFastChaos();
+
+                    return;
+
+                }
+
+
+                /*
+                 瞬移
+                */
+
+                teleportVideo();
+
+
+                /*
+                 15% 機率改大小
+                */
+
+                if (
+                    Math.random() < 0.15
+                ) {
 
                     randomSize();
 
-                },
-                1200
+                }
+
+
+                /*
+                 ★ 超高速
+                 0.06～0.20 秒
+                */
+
+                const nextDelay =
+                    60 +
+                    Math.random() * 140;
+
+
+                chaosTimer =
+                    setTimeout(
+                        chaosStep,
+                        nextDelay
+                    );
+
+            }
+
+
+            chaosStep();
+
+        }
+
+
+        function stopFastChaos() {
+
+            chaosRunning = false;
+
+
+            clearTimeout(
+                chaosTimer
             );
 
 
-            setTimeout(
-                function () {
+            chaosTimer = null;
 
-                    container.classList.remove(
-                        "berserk"
-                    );
 
-                    berserk = false;
-
-                },
-                2400
+            container.classList.remove(
+                "berserk"
             );
 
         }
@@ -1368,7 +1396,7 @@
 
 
         /* =====================================
-           靜音按鈕
+           靜音
         ===================================== */
 
         muteButton.addEventListener(
@@ -1410,9 +1438,6 @@
 
         /* =====================================
            假 ×
-           
-           第一次：連續瞬移
-           第二次：消失
         ===================================== */
 
         let closeClicks = 0;
@@ -1434,7 +1459,12 @@
                     closeClicks === 1
                 ) {
 
-                    crazyTeleport();
+                    /*
+                     第一下：
+                     立刻高速亂跑
+                    */
+
+                    startFastChaos();
 
 
                     closeTimer =
@@ -1448,6 +1478,11 @@
                         );
 
                 } else {
+
+                    /*
+                     第二下：
+                     消失
+                    */
 
                     clearTimeout(
                         closeTimer
@@ -1468,6 +1503,9 @@
         ===================================== */
 
         function hideVideo() {
+
+            stopFastChaos();
+
 
             container.style.display =
                 "none";
@@ -1499,7 +1537,7 @@
 
             randomSize();
 
-            crazyTeleport();
+            startFastChaos();
 
         }
 
@@ -1534,7 +1572,7 @@
                 }
 
 
-                if (berserk) {
+                if (chaosRunning) {
                     return;
                 }
 
@@ -1554,7 +1592,7 @@
 
                 if (
                     now - lastMouseEscape <
-                    700
+                    300
                 ) {
                     return;
                 }
@@ -1565,22 +1603,22 @@
 
 
                 /*
-                 影片周圍 180px
+                 周圍 220px
                 */
 
                 const expanded = {
 
                     left:
-                        rect.left - 180,
+                        rect.left - 220,
 
                     right:
-                        rect.right + 180,
+                        rect.right + 220,
 
                     top:
-                        rect.top - 180,
+                        rect.top - 220,
 
                     bottom:
-                        rect.bottom + 180
+                        rect.bottom + 220
 
                 };
 
@@ -1605,7 +1643,21 @@
                         now;
 
 
-                    teleportVideo();
+                    /*
+                     有機率直接進入暴走
+                    */
+
+                    if (
+                        Math.random() < 0.3
+                    ) {
+
+                        startFastChaos();
+
+                    } else {
+
+                        teleportVideo();
+
+                    }
 
                 }
 
@@ -1615,7 +1667,7 @@
 
         /* =====================================
            手機：
-           碰影片有機率逃跑
+           碰影片
         ===================================== */
 
         let touchCount = 0;
@@ -1636,6 +1688,10 @@
                 touchCount++;
 
 
+                /*
+                 45% 直接跑
+                */
+
                 if (
                     Math.random() < 0.45
                 ) {
@@ -1652,14 +1708,15 @@
                             }
 
                         },
-                        100
+                        60
                     );
 
                 }
 
 
                 /*
-                 摸三次直接暴走
+                 摸三次：
+                 高速暴走
                 */
 
                 if (
@@ -1668,7 +1725,7 @@
 
                     touchCount = 0;
 
-                    startBerserkMode();
+                    startFastChaos();
 
                 }
 
@@ -1693,6 +1750,10 @@
                 }
 
 
+                /*
+                 40% 機率
+                */
+
                 if (
                     Math.random() < 0.4
                 ) {
@@ -1703,7 +1764,7 @@
                             teleportVideo();
 
                         },
-                        150
+                        80
                     );
 
                 }
@@ -1740,12 +1801,12 @@
                                 !isDragging
                             ) {
 
-                                startBerserkMode();
+                                startFastChaos();
 
                             }
 
                         },
-                        650
+                        500
                     );
 
             }
@@ -1777,44 +1838,30 @@
 
 
         /* =====================================
-           自己亂跑
+           自動暴走
            
-           12～30 秒
+           5～15 秒後可能突然發瘋
         ===================================== */
 
         function randomAutoChaos() {
 
             const delay =
-                12000 +
-                Math.random() * 18000;
+                5000 +
+                Math.random() * 10000;
 
 
             setTimeout(
                 function () {
 
+                    /*
+                     80% 機率暴走
+                    */
+
                     if (
-                        Math.random() < 0.75
+                        Math.random() < 0.8
                     ) {
 
-                        if (
-                            Math.random() < 0.45
-                        ) {
-
-                            crazyTeleport();
-
-                        }
-
-
-                        randomSize();
-
-
-                        if (
-                            Math.random() < 0.3
-                        ) {
-
-                            startBerserkMode();
-
-                        }
+                        startFastChaos();
 
                     }
 
@@ -1860,19 +1907,16 @@
                     container.getBoundingClientRect();
 
 
-                /*
-                 影片如果太大，
-                 不強制縮小。
-                 
-                 只確保位置不要完全跑掉。
-                */
-
                 let left =
                     rect.left;
 
                 let top =
                     rect.top;
 
+
+                /*
+                 不主動縮小影片
+                */
 
                 if (
                     left >
@@ -1910,7 +1954,6 @@
 
             }
         );
-
 
     </script>
 
